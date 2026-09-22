@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("kc-theme");
+        if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Login — Kabadiwala Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/page-theme.css" />
+  <style>
+    body {
+      background: linear-gradient(180deg, var(--color-surface) 0%, #edf3ee 100%);
+      min-height: 100vh;
+    }
+    .login-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem) 4rem;
+    }
+    .login-shell {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    @media (max-width: 900px) {
+      .login-shell { grid-template-columns: 1fr; }
+    }
+    .portal-chooser, .auth-card {
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-md);
+    }
+    .portal-chooser {
+      padding: 1.75rem;
+    }
+    .panel-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--color-go);
+      margin-bottom: 1rem;
+    }
+    .panel-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-go);
+      display: inline-block;
+    }
+    .portal-picker {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 540px) { .portal-picker { grid-template-columns: 1fr; } }
+    .portal-btn {
+      padding: 1.1rem 1rem;
+      border-radius: 18px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-surface);
+      text-align: left;
+      transition: all 0.18s ease;
+      cursor: pointer;
+    }
+    .portal-btn:hover, .portal-btn.active {
+      border-color: var(--color-go);
+      background: var(--color-go-light);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    .portal-btn .mini-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(14, 124, 102, 0.08);
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .portal-btn strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+      color: var(--color-text);
+    }
+    .portal-btn span {
+      display: block;
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+    .auth-card {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      padding: 0.35rem;
+      margin-bottom: 1rem;
+    }
+    .mode-tab {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      padding: 0.7rem 0.4rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      cursor: pointer;
+    }
+    .mode-tab.active {
+      background: var(--color-surface-elevated);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+    .auth-form {
+      display: grid;
+      gap: 1rem;
+    }
+    .field { display: grid; gap: 0.45rem; }
+    label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    input {
+      min-height: 48px;
+      border-radius: 14px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-surface);
+      padding: 0.85rem 1rem;
+      font: inherit;
+      color: var(--color-text);
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--color-go);
+      box-shadow: 0 0 0 3px rgba(14,124,102,0.12);
+    }
+    .method-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      padding: 0.35rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+    }
+    .method-btn {
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--color-text-muted);
+      padding: 0.75rem 0.5rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .method-btn.active {
+      background: var(--color-surface-elevated);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+    .otp-box {
+      padding: 0.75rem 0.85rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      display: grid;
+      gap: 0.7rem;
+    }
+    .otp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .tiny-btn {
+      border: 0;
+      border-radius: 999px;
+      background: var(--color-go);
+      color: white;
+      font-weight: 700;
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+    }
+    .tiny-btn.secondary {
+      background: rgba(14,124,102,0.08);
+      color: var(--color-go-dark);
+    }
+    .auth-button {
+      min-height: 52px;
+      border: 0;
+      border-radius: 16px;
+      background: var(--color-go);
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(14,124,102,0.22);
+    }
+    .helper {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    .alert {
+      border-radius: 14px;
+      padding: 0.8rem 0.9rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .alert.error { background: var(--color-hazard-bg); color: var(--color-hazard); }
+    .alert.info { background: var(--color-info-bg); color: var(--color-go-dark); }
+    .screen-title {
+      margin: 0 0 0.35rem;
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-family: var(--font-display);
+      color: var(--color-text);
+      line-height: 1.15;
+    }
+    .screen-sub {
+      margin: 0 0 1rem;
+      color: var(--color-text-muted);
+    }
+    .mini-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(14,124,102,0.08);
+      color: var(--color-go-dark);
+      font-weight: 700;
+      font-size: 0.72rem;
+    }
+
+    /* ---------- Footer (identical to the homepage) ---------- */
+    .site-footer{background:transparent; color:var(--ink-dim); padding:5.5rem 0 2rem; border-top:1px solid var(--border); margin-top:2rem;}
+    .site-footer .container{max-width:1180px; margin:0 auto; padding:0 clamp(1.25rem,4vw,2.5rem);}
+    .footer-statement{font-family:var(--font-display); font-weight:600; font-size:clamp(1.7rem,3.6vw,2.6rem); line-height:1.15; margin-bottom:3.5rem; max-width:36rem; color:var(--ink);}
+    .footer-statement .accent{color:var(--copper);}
+    .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2.5rem; padding-bottom:3rem; border-bottom:1px solid var(--border);}
+    @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+    .footer-brand .logo{margin-bottom:.9rem; display:flex; align-items:center;}
+    .footer-brand .brand-logo{height:28px; width:auto;}
+    .footer-brand p{color:var(--ink-dim); font-size:.88rem; max-width:20rem;}
+    .footer-col h4{font-size:.78rem; font-weight:700; letter-spacing:.03em; color:var(--ink-faint); margin:0 0 .9rem;}
+    .footer-col a{display:block; font-size:.9rem; color:var(--ink-dim); margin-bottom:.65rem; text-decoration:none;}
+    .footer-col a:hover{color:var(--copper);}
+    .footer-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:.6rem; padding-top:1.4rem; font-size:.8rem; color:var(--ink-faint);}
+  </style>
+</head>
+<body>
+  <div id="kc-nav"></div>
+
+  <main class="login-wrap">
+    <div class="login-shell">
+      <section class="portal-chooser" aria-label="Choose portal">
+        <div class="panel-kicker">Welcome back</div>
+        <h1 class="screen-title">Choose your portal</h1>
+        <p class="screen-sub">Access the collector or recycler workspace with secure demo login.</p>
+
+        <div class="portal-picker">
+          <button type="button" class="portal-btn active" data-portal="collector">
+            <div class="mini-icon">📷</div>
+            <strong>Collector Portal</strong>
+            <span>Scan scrap, price it, find authorized recyclers and track your earnings.</span>
+          </button>
+          <button type="button" class="portal-btn" data-portal="recycler">
+            <div class="mini-icon">🏭</div>
+            <strong>Recycler Portal</strong>
+            <span>Accept incoming lots, quote material rates and manage handovers.</span>
+          </button>
+        </div>
+
+        <div class="mini-meta">Trusted by 132 collectors · 4 authorized recyclers</div>
+      </section>
+
+      <section class="auth-card" aria-live="polite">
+        <div class="mode-tabs" role="tablist" aria-label="Authentication mode">
+          <button type="button" class="mode-tab active" data-mode="login">Login</button>
+          <button type="button" class="mode-tab" data-mode="register">Register</button>
+          <button type="button" class="mode-tab" data-mode="forgot">Reset</button>
+        </div>
+
+        <form class="auth-form" id="authForm">
+          <div class="field" data-field="name">
+            <label for="nameInput">Full name *</label>
+            <input id="nameInput" type="text" placeholder="Rekha Sharma" autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="contactInput">Email or mobile number *</label>
+            <input id="contactInput" type="text" placeholder="rekha@example.com / +91 98200 00000" autocomplete="username" />
+          </div>
+
+          <div class="method-toggle" role="group" aria-label="Authentication method">
+            <button type="button" class="method-btn active" data-method="password">Password</button>
+            <button type="button" class="method-btn" data-method="otp">OTP</button>
+          </div>
+
+          <div class="field" data-password-field>
+            <label for="passInput">Password *</label>
+            <input id="passInput" type="password" placeholder="Minimum 4 characters" autocomplete="current-password" />
+          </div>
+
+          <div class="otp-box hidden" data-otp-box>
+            <div class="otp-row">
+              <strong>Verify with OTP</strong>
+              <button type="button" class="tiny-btn secondary" id="sendOtpBtn">Send OTP</button>
+            </div>
+            <div class="field">
+              <label for="otpInput">6-digit code *</label>
+              <input id="otpInput" type="text" maxlength="6" inputmode="numeric" placeholder="••••••" />
+            </div>
+          </div>
+
+          <div id="alertBox" class="alert info" style="display:none"></div>
+
+          <button type="submit" class="auth-button" id="submitBtn">Login as Collector</button>
+        </form>
+
+        <div class="helper">Demo auth only — session is local to this browser.</div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER (same as homepage) ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-statement">
+        <span data-i18n="foot_l1">Turning scrap into</span> <span class="accent" data-i18n="foot_l2">traceable value.</span>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="color:var(--ink);">
+            <img class="brand-logo" src="../assets/punarva-logo.svg" alt="PUNARVA" />
+          </div>
+          <p data-i18n="footer_tagline">Turning informal e-waste collection into a formal, fair and traceable recycling journey.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_product">Product</h4>
+          <a href="collector.html" data-i18n="nav_collector">Collector App</a>
+          <a href="recycler.html" data-i18n="nav_recycler">Recycler Portal</a>
+          <a href="admin.html" data-i18n="nav_admin">Admin Dashboard</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_about">About</h4>
+          <a href="../index.html#how" data-i18n="nav_how">How it works</a>
+          <a href="../index.html#network" data-i18n="nav_impact">Impact</a>
+          <a href="collector.html" data-i18n="footer_install">Install app (PWA)</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_language">Language</h4>
+          <div class="lang-toggle" role="group" aria-label="Language">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="hi">हिं</button>
+            <button class="lang-btn" data-lang="mr">मर</button>
+          </div>
+          <span style="display:block; margin-top:1rem; font-size:0.8125rem; color:var(--ink-faint);">Ministry of Mines · JNARDDC</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>PUNARVA · SIH26229 · Clean &amp; Green Technology</span>
+        <span>Draft v2.0 · Demo prototype</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script>
+    const portalButtons = document.querySelectorAll('.portal-btn');
+    const modeButtons = document.querySelectorAll('.mode-tab');
+    const methodButtons = document.querySelectorAll('.method-btn');
+    const submitBtn = document.getElementById('submitBtn');
+    const alertBox = document.getElementById('alertBox');
+    const nameField = document.querySelector('[data-field="name"]');
+    const passField = document.querySelector('[data-password-field]');
+    const otpBox = document.querySelector('[data-otp-box]');
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const nameInput = document.getElementById('nameInput');
+    const contactInput = document.getElementById('contactInput');
+    const passInput = document.getElementById('passInput');
+    const otpInput = document.getElementById('otpInput');
+
+    let activePortal = 'collector';
+    let activeMode = 'login';
+    let activeMethod = 'password';
+
+    function setAlert(message, type) {
+      if (!message) {
+        alertBox.style.display = 'none';
+        alertBox.textContent = '';
+        return;
+      }
+      alertBox.textContent = message;
+      alertBox.className = 'alert ' + type;
+      alertBox.style.display = 'block';
+    }
+
+    function syncPortalText() {
+      const label = activePortal === 'collector' ? 'Collector' : 'Recycler';
+      const action = activeMode === 'login' ? 'Login' : activeMode === 'register' ? 'Create account' : 'Reset password';
+      submitBtn.textContent = action + ' as ' + label;
+    }
+
+    function syncFields() {
+      const modeNeedsName = activeMode !== 'forgot';
+      nameField.style.display = modeNeedsName ? 'grid' : 'none';
+      passField.style.display = activeMethod === 'password' ? 'grid' : 'none';
+      otpBox.style.display = activeMethod === 'otp' ? 'grid' : 'none';
+      syncPortalText();
+    }
+
+    portalButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        portalButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
+        activePortal = button.dataset.portal;
+        setAlert('', 'info');
+        syncPortalText();
+      });
+    });
+
+    modeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        modeButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
+        activeMode = button.dataset.mode;
+        setAlert('', 'info');
+        syncFields();
+      });
+    });
+
+    methodButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        methodButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
+        activeMethod = button.dataset.method;
+        setAlert('', 'info');
+        syncFields();
+      });
+    });
+
+    sendOtpBtn.addEventListener('click', () => {
+      if (!contactInput.value.trim()) {
+        setAlert('Enter a valid email or mobile number first.', 'error');
+        return;
+      }
+      setAlert('OTP sent to ' + contactInput.value.trim() + ' (demo mode).', 'info');
+    });
+
+    document.getElementById('authForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const nameOk = activeMode === 'forgot' ? true : nameInput.value.trim().length >= 2;
+      const contactOk = contactInput.value.trim().length >= 4;
+      const passOk = activeMethod === 'password' ? passInput.value.trim().length >= 4 : true;
+      const otpOk = activeMethod === 'otp' ? otpInput.value.trim().length === 6 : true;
+
+      if (!nameOk) {
+        setAlert('Please enter your full name to continue.', 'error');
+        return;
+      }
+      if (!contactOk) {
+        setAlert('Enter a valid email address or mobile number.', 'error');
+        return;
+      }
+      if (!passOk || !otpOk) {
+        setAlert('Complete the required authentication details before continuing.', 'error');
+        return;
+      }
+
+      setAlert(activePortal === 'collector' ? 'Collector portal access granted.' : 'Recycler portal access granted.', 'info');
+      const target = activePortal === 'collector' ? '../pages/collector.html' : '../pages/recycler.html';
+      setTimeout(function () { window.location.href = target; }, 500);
+    });
+
+    syncFields();
+  </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <script>
+    /* Apply saved theme before paint to avoid a flash (shared with landing). */
+    (function () {
+      try {
+        var t = localStorage.getItem("kc-theme");
+        if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recycler Portal — PUNARVA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/design-system.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/page-theme.css" />
+  <style>
+    /* demo-bar layout tweaks (colors come from page-theme.css) */
+    .demo-bar {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ops-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .ops-card {
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .ops-card .num {
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+    .mat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1rem;
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+    }
+    .toggle {
+      width: 44px;
+      height: 24px;
+      background: var(--color-border);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle.on { background: var(--color-go); }
+    .toggle::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: left 0.2s;
+    }
+    .toggle.on::after { left: 23px; }
+    .kc-panel .portal-main { padding: 0; background: transparent; }
+    .kc-panel .portal-header { padding: 0 0 1.25rem; }
+    @media (max-width: 700px) {
+      .request-card { grid-template-columns: 64px 1fr; }
+      .request-photo { width: 64px; height: 64px; }
+      .request-actions { grid-column: 1 / -1; min-width: 0; }
+    }
+  </style>
+</head>
+<body class="kc-desktop">
+  <!-- Shared navigation (single source: js/nav.js) -->
+  <div id="kc-nav"></div>
+
+  <div class="kc-page">
+    <div class="kc-page-head">
+      <div>
+        <span class="kc-eyebrow">Recycler workspace · Demo</span>
+        <h1>Manage incoming scrap requests.</h1>
+        <p>Quote, accept or counter in two taps</p>
+      </div>
+      <span class="kc-offline"><span>●</span><span>GreenCycle Recycling · Authorized · CPCB</span></span>
+    </div>
+
+    <div class="kc-workspace">
+      <aside class="kc-rail" aria-label="Sections">
+        <button class="rail-item active" type="button" data-panel="incoming" onclick="showPanel('incoming')"><span class="icon">📥</span><span>Incoming Requests</span></button>
+        <button class="rail-item" type="button" data-panel="ops" onclick="showPanel('ops')"><span class="icon">📊</span><span>Operations</span></button>
+        <button class="rail-item" type="button" data-panel="materials" onclick="showPanel('materials')"><span class="icon">⚙️</span><span>Materials &amp; Availability</span></button>
+        <div class="kc-rail-sep"></div>
+        <a class="rail-item" href="../pages/admin.html"><span class="icon">📈</span><span>Program Admin</span></a>
+      </aside>
+
+      <div class="kc-stage">
+        <div class="kc-panel">
+          <main class="portal-main">
+      <!-- Incoming -->
+      <div id="panel-incoming">
+        <div class="portal-header">
+          <div>
+            <h1 class="heading-1">Incoming Requests</h1>
+            <p class="body-sm text-muted mt-1">Quote, accept or counter in two taps</p>
+          </div>
+          <span class="badge badge-go">7 open</span>
+        </div>
+
+        <!-- Request 1 -->
+        <div class="request-card">
+          <div class="request-photo">🔌</div>
+          <div>
+            <div style="font-weight: 600;">PCB · 3.5 kg</div>
+            <div class="body-sm text-muted">2.1 km away · Collector #A7F3</div>
+            <div class="body-sm mt-1">Asked: ₹410 / kg · Est. ₹1,435</div>
+            <div class="caption mt-1">Photo + GPS attached · 12 min ago</div>
+          </div>
+          <div class="request-actions">
+            <input type="text" class="quote-input" value="410" placeholder="₹ / kg" />
+            <button class="btn btn-primary" style="min-height: 36px; font-size: 0.875rem;" onclick="acceptReq(this)">Accept</button>
+            <button class="btn btn-secondary" style="min-height: 36px; font-size: 0.875rem;" onclick="counterReq(this)">Counter</button>
+            <button class="btn btn-ghost" style="min-height: 32px; font-size: 0.8125rem; color: var(--color-hazard);" onclick="declineReq(this)">Decline</button>
+          </div>
+        </div>
+
+        <!-- Request 2 -->
+        <div class="request-card">
+          <div class="request-photo">🔋</div>
+          <div>
+            <div style="font-weight: 600;">Battery · 2.1 kg</div>
+            <div class="body-sm text-muted">5.4 km away · Collector #B2C9</div>
+            <div class="body-sm mt-1">Asked: ₹200 / kg · Est. ₹420</div>
+            <div class="caption mt-1">Hazard flag: swollen cell · 28 min ago</div>
+            <span class="badge badge-hazard mt-1">⚠ Hazard detected</span>
+          </div>
+          <div class="request-actions">
+            <input type="text" class="quote-input" value="190" placeholder="₹ / kg" />
+            <button class="btn btn-primary" style="min-height: 36px; font-size: 0.875rem;" onclick="acceptReq(this)">Accept</button>
+            <button class="btn btn-secondary" style="min-height: 36px; font-size: 0.875rem;" onclick="counterReq(this)">Counter</button>
+            <button class="btn btn-ghost" style="min-height: 32px; font-size: 0.8125rem; color: var(--color-hazard);" onclick="declineReq(this)">Decline</button>
+          </div>
+        </div>
+
+        <!-- Request 3 -->
+        <div class="request-card">
+          <div class="request-photo">🔌</div>
+          <div>
+            <div style="font-weight: 600;">Cable · 8 kg</div>
+            <div class="body-sm text-muted">1.8 km away · Collector #C4D1</div>
+            <div class="body-sm mt-1">Asked: ₹120 / kg · Est. ₹960</div>
+            <div class="caption mt-1">Self-drop preferred · 45 min ago</div>
+          </div>
+          <div class="request-actions">
+            <input type="text" class="quote-input" value="125" placeholder="₹ / kg" />
+            <button class="btn btn-primary" style="min-height: 36px; font-size: 0.875rem;" onclick="acceptReq(this)">Accept</button>
+            <button class="btn btn-secondary" style="min-height: 36px; font-size: 0.875rem;" onclick="counterReq(this)">Counter</button>
+            <button class="btn btn-ghost" style="min-height: 32px; font-size: 0.8125rem; color: var(--color-hazard);" onclick="declineReq(this)">Decline</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operations -->
+      <div id="panel-ops" class="hidden">
+        <div class="portal-header">
+          <div>
+            <h1 class="heading-1">Operations Overview</h1>
+            <p class="body-sm text-muted mt-1">Today’s workload at a glance</p>
+          </div>
+        </div>
+        <div class="ops-strip">
+          <div class="ops-card">
+            <div class="num" style="color: var(--color-go);">4</div>
+            <div class="body-sm text-muted">Active pickups</div>
+          </div>
+          <div class="ops-card">
+            <div class="num" style="color: var(--color-caution);">3</div>
+            <div class="body-sm text-muted">Pending handovers</div>
+          </div>
+          <div class="ops-card">
+            <div class="num" style="color: var(--color-info);">42</div>
+            <div class="body-sm text-muted">Completed (month)</div>
+          </div>
+        </div>
+        <div class="card card-body">
+          <h3 class="heading-3 mb-3">Recent handovers</h3>
+          <div class="flex justify-between body-sm mb-2" style="padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
+            <span>LOT-A7F3 · PCB 3.5 kg</span>
+            <span class="badge badge-go">Confirmed</span>
+          </div>
+          <div class="flex justify-between body-sm mb-2" style="padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
+            <span>LOT-B2C9 · Cable 8 kg</span>
+            <span class="badge badge-go">Confirmed</span>
+          </div>
+          <div class="flex justify-between body-sm">
+            <span>LOT-C4D1 · Motor 12 kg</span>
+            <span class="badge badge-caution">Awaiting scan</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Materials -->
+      <div id="panel-materials" class="hidden">
+        <div class="portal-header">
+          <div>
+            <h1 class="heading-1">Materials & Availability</h1>
+            <p class="body-sm text-muted mt-1">Changes feed the Matching Engine immediately</p>
+          </div>
+        </div>
+        <div class="card card-body mb-4">
+          <div class="flex justify-between items-center mb-3">
+            <span class="heading-3">Pickup available</span>
+            <div class="toggle on" id="pickupToggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="body-sm text-muted">Service radius: 15 km</div>
+        </div>
+        <h3 class="heading-3 mb-3">Materials accepted</h3>
+        <div class="mat-row">
+          <span>🔌 PCB</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="mat-row">
+          <span>🔌 Cable</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="mat-row">
+          <span>🔋 Battery</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="mat-row">
+          <span>⚙️ Motor</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="mat-row">
+          <span>🖥️ LCD</span>
+          <div class="toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="mat-row">
+          <span>📺 CRT</span>
+          <div class="toggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="mat-row">
+          <span>🧴 Mixed plastic</span>
+          <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        </div>
+      </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function showPanel(name) {
+      ["incoming", "ops", "materials"].forEach(p => {
+        const el = document.getElementById("panel-" + p);
+        if (el) el.classList.toggle("hidden", p !== name);
+      });
+      document.querySelectorAll(".kc-rail .rail-item[data-panel]").forEach((a) => {
+        a.classList.toggle("active", a.dataset.panel === name);
+      });
+      document.querySelectorAll(".portal-nav a").forEach((a, i) => {
+        const names = ["incoming", "ops", "materials"];
+        if (names[i]) a.classList.toggle("active", names[i] === name);
+      });
+    }
+
+    function acceptReq(btn) {
+      const card = btn.closest(".request-card");
+      card.style.opacity = "0.5";
+      card.style.pointerEvents = "none";
+      if (window.KC) KC.showToast("Quote accepted · Collector notified");
+    }
+
+    function counterReq(btn) {
+      if (window.KC) KC.showToast("Counter-offer sent");
+    }
+
+    function declineReq(btn) {
+      const card = btn.closest(".request-card");
+      card.remove();
+      if (window.KC) KC.showToast("Request declined");
+    }
+  </script>
+</body>
+</html>

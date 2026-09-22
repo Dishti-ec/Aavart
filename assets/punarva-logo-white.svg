@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">PUNARVA white logo</title>
+  <desc id="desc">White eco recycling emblem for dark mode.</desc>
+  <defs>
+    <linearGradient id="whiteFade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dfe7e1"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(24 16)">
+    <path d="M173 540c-47-37-77-94-77-160 0-121 99-220 220-220 60 0 115 24 155 64l-32 32c-34-31-80-49-123-49-93 0-169 76-169 169 0 50 21 95 55 128l-29 36z" fill="url(#whiteFade)" opacity="0.96"/>
+    <path d="M446 597c66 0 127-28 171-72l-29-34c-33 33-77 52-125 52-17 0-33-2-49-7l33-40c30 8 59 9 90 2 53-12 96-45 118-92l40 23c-31 76-96 129-177 146-27 6-55 9-82 9-43 0-84-11-119-32l35-35c23 12 48 19 73 19z" fill="url(#whiteFade)" opacity="0.96"/>
+
+    <g fill="url(#whiteFade)">
+      <path d="M334 70c36-30 84-46 133-46-31 123-90 174-196 196 18-39 36-93 63-150z"/>
+      <path d="M428 45c72 2 131 39 158 99-68-6-112-37-137-85-9-18-15-31-21-43z"/>
+    </g>
+
+    <path d="M188 500c53-31 121-49 193-49 201 0 365 164 365 365 0 21-2 41-6 61H519c7-20 10-41 10-62 0-93-76-169-169-169-62 0-118 33-147 84l-25-32z" fill="url(#whiteFade)" opacity="0.96"/>
+
+    <path d="M176 449c0 0 45-115 176-149 149-38 259 71 284 123l18-11c-33-91-137-185-295-155-170 33-230 184-232 192l49 0z" fill="none" stroke="url(#whiteFade)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M582 214l92 35-92 38 18-38-18-35z" fill="url(#whiteFade)"/>
+    <path d="M176 580l35-96-31 11 15 85z" fill="url(#whiteFade)"/>
+
+    <g transform="translate(232 268)">
+      <rect x="0" y="30" width="110" height="182" rx="15" fill="rgba(255,255,255,0.08)" stroke="url(#whiteFade)" stroke-width="8"/>
+      <rect x="68" y="0" width="120" height="240" rx="18" fill="rgba(255,255,255,0.08)" stroke="url(#whiteFade)" stroke-width="8"/>
+      <rect x="165" y="146" width="122" height="146" rx="18" fill="rgba(255,255,255,0.08)" stroke="url(#whiteFade)" stroke-width="8"/>
+      <path d="M31 98h68M31 126h68M43 160h42" stroke="url(#whiteFade)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M111 73h45M111 102h45M111 131h45" stroke="url(#whiteFade)" stroke-width="9" stroke-linecap="round"/>
+      <path d="M245 188h48M245 215h48" stroke="url(#whiteFade)" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="50" cy="80" r="7" fill="url(#whiteFade)"/>
+      <circle cx="100" cy="130" r="10" fill="url(#whiteFade)"/>
+      <path d="M179 170l18-10 24 18-26 11-16-19z" fill="url(#whiteFade)"/>
+    </g>
+
+    <path d="M254 610c74 35 152 52 230 42 48-6 94-19 135-43" stroke="url(#whiteFade)" stroke-width="16" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

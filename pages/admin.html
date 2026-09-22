@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <script>
+    /* Apply saved theme before paint to avoid a flash (shared with landing). */
+    (function () {
+      try {
+        var t = localStorage.getItem("kc-theme");
+        if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — PUNARVA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/design-system.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/page-theme.css" />
+  <style>
+    /* demo-bar layout tweaks (colors come from page-theme.css) */
+    .demo-bar {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+    .funnel-stage .count {
+      font-weight: 700;
+      min-width: 48px;
+      text-align: right;
+      color: var(--color-go);
+    }
+    .funnel-stage .label {
+      flex: 1;
+      font-weight: 500;
+    }
+    .bar-wrap {
+      width: 120px;
+      height: 8px;
+      background: var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <!-- Shared navigation (single source: js/nav.js) -->
+  <div id="kc-nav"></div>
+
+  <div class="admin-layout">
+    <header style="margin-bottom: 2rem;">
+      <div class="flex items-center gap-3 mb-2">
+        <a href="../index.html" class="logo">
+          <img class="brand-logo" data-light-src="../assets/punarva-logo.svg" data-dark-src="../assets/punarva-logo-white.svg" src="../assets/punarva-logo.svg" alt="PUNARVA" />
+        </a>
+        <span class="badge badge-info">Program Admin</span>
+      </div>
+      <h1 class="heading-1">Program Overview</h1>
+      <p class="body-sm text-muted mt-1">Evidence that the formal channel is growing · Ministry of Mines / JNARDDC</p>
+    </header>
+
+    <!-- Metrics -->
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="value">214</div>
+        <div class="label">Collectors registered</div>
+        <span class="demo-label">Demo data</span>
+      </div>
+      <div class="metric-card">
+        <div class="value">38</div>
+        <div class="label">Authorized recyclers</div>
+        <span class="demo-label">Demo data</span>
+      </div>
+      <div class="metric-card">
+        <div class="value">12.4 t</div>
+        <div class="label">E-waste traceably handed over</div>
+        <span class="demo-label">Demo data</span>
+      </div>
+      <div class="metric-card">
+        <div class="value">89%</div>
+        <div class="label">Quotes accepted (no renegotiation)</div>
+        <span class="demo-label">Demo data</span>
+      </div>
+    </div>
+
+    <!-- Live Flow -->
+    <section style="margin-bottom: 2.5rem;">
+      <h2 class="heading-2 mb-3">Live flow visualization</h2>
+      <p class="body-sm text-muted mb-4">Mirrors the 7-step pipeline · counts of active items at each stage</p>
+      <div class="funnel">
+        <div class="funnel-stage">
+          <span class="label">Collectors active (7d)</span>
+          <div class="bar-wrap"><div class="funnel-bar" style="width: 100%;"></div></div>
+          <span class="count">142</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="label">Digital lots created</span>
+          <div class="bar-wrap"><div class="funnel-bar" style="width: 78%;"></div></div>
+          <span class="count">318</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="label">Recycler matched</span>
+          <div class="bar-wrap"><div class="funnel-bar" style="width: 62%;"></div></div>
+          <span class="count">251</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="label">Pickup scheduled</span>
+          <div class="bar-wrap"><div class="funnel-bar" style="width: 48%;"></div></div>
+          <span class="count">194</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="label">Handover complete</span>
+          <div class="bar-wrap"><div class="funnel-bar" style="width: 41%;"></div></div>
+          <span class="count">167</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="label">Recycled confirmed</span>
+          <div class="bar-wrap"><div class="funnel-bar" style="width: 36%;"></div></div>
+          <span class="count">148</span>
+        </div>
+      </div>
+      <p class="caption mt-3">All figures above are labelled demo / synthetic and are not blended with field-research data.</p>
+    </section>
+
+    <!-- Material mix & geography -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="admin-split">
+      <div class="card card-body">
+        <h3 class="heading-3 mb-3">Material mix (handovers)</h3>
+        <div class="flex justify-between body-sm mb-2">
+          <span>🔌 PCB</span>
+          <strong>34%</strong>
+        </div>
+        <div style="height: 6px; background: var(--color-border); border-radius: 3px; margin-bottom: 0.75rem;">
+          <div style="height: 100%; width: 34%; background: var(--color-go); border-radius: 3px;"></div>
+        </div>
+        <div class="flex justify-between body-sm mb-2">
+          <span>🔌 Cable</span>
+          <strong>28%</strong>
+        </div>
+        <div style="height: 6px; background: var(--color-border); border-radius: 3px; margin-bottom: 0.75rem;">
+          <div style="height: 100%; width: 28%; background: var(--color-go); border-radius: 3px;"></div>
+        </div>
+        <div class="flex justify-between body-sm mb-2">
+          <span>🔋 Battery</span>
+          <strong>18%</strong>
+        </div>
+        <div style="height: 6px; background: var(--color-border); border-radius: 3px; margin-bottom: 0.75rem;">
+          <div style="height: 100%; width: 18%; background: var(--color-go); border-radius: 3px;"></div>
+        </div>
+        <div class="flex justify-between body-sm mb-2">
+          <span>⚙️ Motor</span>
+          <strong>12%</strong>
+        </div>
+        <div style="height: 6px; background: var(--color-border); border-radius: 3px; margin-bottom: 0.75rem;">
+          <div style="height: 100%; width: 12%; background: var(--color-go); border-radius: 3px;"></div>
+        </div>
+        <div class="flex justify-between body-sm">
+          <span>Other</span>
+          <strong>8%</strong>
+        </div>
+        <div style="height: 6px; background: var(--color-border); border-radius: 3px;">
+          <div style="height: 100%; width: 8%; background: var(--color-go); border-radius: 3px;"></div>
+        </div>
+      </div>
+
+      <div class="card card-body">
+        <h3 class="heading-3 mb-3">Success metrics snapshot</h3>
+        <div class="flex justify-between body-sm mb-3" style="padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
+          <span>Median time to handover</span>
+          <strong>4.2 hrs</strong>
+        </div>
+        <div class="flex justify-between body-sm mb-3" style="padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
+          <span>Weekly active collectors</span>
+          <strong>66%</strong>
+        </div>
+        <div class="flex justify-between body-sm mb-3" style="padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
+          <span>Anomaly-flag rate</span>
+          <strong>3.1%</strong>
+        </div>
+        <div class="flex justify-between body-sm">
+          <span>Avg. net-earnings uplift</span>
+          <strong style="color: var(--color-go);">+18%</strong>
+        </div>
+        <p class="caption mt-3">Field-research figures will be labelled separately and never mixed with demo counters.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.25rem; background: var(--color-caution-bg); border-radius: var(--radius-md); border: 1px solid var(--color-caution);">
+      <strong style="color: var(--color-caution);">Labeling rule (PRD §11)</strong>
+      <p class="body-sm mt-1" style="color: var(--color-text-muted);">Any figures from synthetic or demo datasets are visibly labelled. Field-research data is labelled separately and never blended in the same counter.</p>
+    </div>
+  </div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+  <style>
+    @media (max-width: 640px) {
+      .admin-split { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</body>
+</html>

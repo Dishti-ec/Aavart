@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">PUNARVA logo</title>
+  <desc id="desc">Green circular recycling emblem with leaves, device stack and battery.</desc>
+  <defs>
+    <linearGradient id="ringGreen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2ad87d"/>
+      <stop offset="0.55" stop-color="#10a666"/>
+      <stop offset="1" stop-color="#0b7957"/>
+    </linearGradient>
+    <linearGradient id="leafGreen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#23d27d"/>
+      <stop offset="1" stop-color="#0e7d4e"/>
+    </linearGradient>
+    <linearGradient id="deepTeal" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f3d4d"/>
+      <stop offset="1" stop-color="#0b6064"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(15 8)">
+    <path d="M175 135c58-92 157-117 253-87-18 70-66 132-130 168-35-17-76-44-123-81z" fill="url(#leafGreen)"/>
+    <path d="M533 116c-34-65-96-96-166-98 19 90 73 148 146 183 42-20 71-45 97-85h-77z" fill="url(#leafGreen)"/>
+
+    <path d="M170 160c58-72 120-100 201-112 33 52 52 104 43 156-59-17-119-12-188 27-36 19-62 41-79 68-15-53-8-106 23-139z" fill="url(#leafGreen)" opacity="0.82"/>
+
+    <path d="M238 478c-22-17-47-26-75-26-64 0-117 52-117 117 0 31 12 61 34 84l92-34-19-27 127-48-42-66z" fill="url(#deepTeal)" opacity="0.9"/>
+    <path d="M552 487c33-11 67-12 98-1 54 18 95 64 104 119l-83 26-26-47-128-42 35-55z" fill="url(#deepTeal)" opacity="0.9"/>
+
+    <path d="M186 530c49-42 107-64 170-64 149 0 270 121 270 270 0 19-2 38-7 56H198c-23-26-36-59-36-94 0-59 25-110 70-168z" fill="url(#ringGreen)" opacity="0.94"/>
+
+    <path d="M245 273c18-62 63-114 127-149 86-49 195-46 280 10 42 28 76 69 98 119 13 31 17 62 12 94-16 37-49 56-89 57l-31-66c12-8 20-23 18-39-3-22-18-42-38-50-43-18-92-23-137-8-36 12-70 37-94 67l-31 22-15-6z" fill="url(#deepTeal)" opacity="0.94"/>
+
+    <path d="M143 524c22-115 114-209 231-242 88-24 184-7 255 53 31 26 60 60 80 98-18-11-36-22-53-31-92-45-170-51-233-22-66 32-148 107-194 218-17 42-27 78-30 104-27-18-40-54-56-98z" fill="url(#ringGreen)" opacity="0.92"/>
+
+    <path d="M496 175c61 3 106 38 134 96-53-8-98-33-128-72-19-25-32-45-39-61 11 15 20 24 33 37z" fill="url(#leafGreen)"/>
+
+    <g transform="translate(243 301)">
+      <rect x="0" y="46" width="118" height="196" rx="16" fill="#0a2d36" stroke="#f4f9f3" stroke-width="8"/>
+      <rect x="90" y="0" width="126" height="246" rx="18" fill="#0a2d36" stroke="#f4f9f3" stroke-width="8"/>
+      <rect x="192" y="126" width="128" height="154" rx="18" fill="#0a2d36" stroke="#f4f9f3" stroke-width="8"/>
+
+      <circle cx="158" cy="126" r="20" fill="#27d48f" opacity="0.9"/>
+      <circle cx="22" cy="96" r="6" fill="#ffffff"/>
+      <circle cx="55" cy="96" r="6" fill="#ffffff"/>
+      <circle cx="88" cy="96" r="6" fill="#ffffff"/>
+
+      <g stroke="#e9f7f0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M118 100H186M118 137H186M118 174H186"/>
+        <path d="M226 172H286M226 204H286M226 236H286"/>
+      </g>
+
+      <g fill="#dff8ed">
+        <path d="M24 274l26-42 33 33-18 21-22 18-19-30z"/>
+        <path d="M283 324l16-30 28 22-13 19-17 19-14-30z"/>
+      </g>
+
+      <path d="M167 60h32v30h-32z" fill="#f4f9f3"/>
+      <path d="M112 248l57 0" stroke="#f4f9f3" stroke-width="6" stroke-linecap="round"/>
+      <path d="M242 256l33 0" stroke="#f4f9f3" stroke-width="6" stroke-linecap="round"/>
+
+      <g fill="#ffffff">
+        <rect x="115" y="172" width="18" height="16" rx="4"/>
+        <rect x="135" y="172" width="18" height="16" rx="4"/>
+        <rect x="155" y="172" width="18" height="16" rx="4"/>
+      </g>
+    </g>
+
+    <path d="M278 602c72 39 162 58 247 47 48-6 96-22 142-46" fill="none" stroke="#e9f7f0" stroke-width="18" stroke-linecap="round"/>
+  </g>
+</svg>
