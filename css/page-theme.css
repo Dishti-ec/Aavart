@@ -186,6 +186,9 @@ input::placeholder, textarea::placeholder, .quote-input::placeholder { color: va
   display:flex; align-items:center; justify-content:space-between; height:68px; gap:1.5rem;
 }
 .site-header .logo{display:flex; align-items:center; font-family:var(--font-display); font-weight:600; font-size:1.02rem; color:var(--ink); flex-shrink:0; text-decoration:none;}
+.brand-logo{display:block; width:auto; height:42px; object-fit:contain; flex-shrink:0;}
+html[data-theme="dark"] .brand-logo{background:transparent; border-radius:0;}
+@media (max-width:720px){ .brand-logo{height:36px;} }
 
 /* match the homepage: light shows sun, dark shows moon */
 .site-header .theme-icon{display:none;}

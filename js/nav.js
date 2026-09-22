@@ -161,7 +161,7 @@
         + '</div>'
         + '<div class="footer-col">'
           + '<a href="' + root + 'index.html#how">How it works</a>'
-          + '<a href="' + pg + 'collector.html">Collector</a>'
+          + '<a href="' + pg + 'collector-portal.html">Collector</a>'
           + '<a href="' + pg + 'recycler.html">Recycler</a>'
         + '</div>'
         + '<div class="footer-col">'
