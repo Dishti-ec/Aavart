@@ -68,7 +68,7 @@
     '<header class="site-header" id="siteHeader">' +
       '<div class="container header-inner">' +
         '<a href="' + root + 'index.html" class="logo">' +
-          '<img class="brand-logo" data-light-src="' + root + 'assets/punarva-logo.svg" data-dark-src="' + root + 'assets/punarva-logo-white.svg" src="' + root + 'assets/punarva-logo.svg" alt="PUNARVA" />' +
+          '<img class="brand-logo" data-light-src="' + root + 'assets/punarva-logo.png" data-dark-src="' + root + 'assets/punarva-logo.png" src="' + root + 'assets/punarva-logo.png" alt="PUNARVA" />' +
         '</a>' +
         '<nav class="nav-links">' + linksHTML() + '</nav>' +
         '<div class="header-actions">' +
@@ -155,7 +155,7 @@
       + '<div class="container footer-inner">'
         + '<div class="footer-col">'
           + '<a href="' + root + 'index.html" class="logo">'
-            + '<img class="brand-logo" data-light-src="' + root + 'assets/punarva-logo.svg" data-dark-src="' + root + 'assets/punarva-logo-white.svg" src="' + root + 'assets/punarva-logo.svg" alt="PUNARVA" />'
+            + '<img class="brand-logo" data-light-src="' + root + 'assets/punarva-logo.png" data-dark-src="' + root + 'assets/punarva-logo.png" src="' + root + 'assets/punarva-logo.png" alt="PUNARVA" />'
           + '</a>'
           + '<div class="caption">Turning scrap into traceable value.</div>'
         + '</div>'
